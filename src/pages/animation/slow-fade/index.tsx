@@ -6,7 +6,7 @@ import img01 from '@/images/slow-fade/img01.png';
 import img02 from '@/images/slow-fade/img02.png';
 import { useEffect, useRef, useState } from 'react';
 
-function Slow() {
+function SlowFade() {
 	// 각 DOM 을 담을 ref 생성
 	const opacityRef = useRef<HTMLElement[]>([]);
 
@@ -32,7 +32,8 @@ function Slow() {
 			const present = Math.abs(offsetTop) / median;
 
 			if (0 > offsetTop && bottom > median) {
-				present < 1
+				console.log(present);
+				present < 1.5 // 임의의 숫자
 					? (opacityData[index] = present) // 중간 이전 1이 될 경우
 					: (opacityData[index] = 1 - present * 0.2); // 중간 이후 0이 될 경우(추측으로 구함)
 				return setOpacity(opacityData); // 구한 값을 useState에 할당
@@ -152,4 +153,4 @@ function Slow() {
 	);
 }
 
-export default Slow;
+export default SlowFade;

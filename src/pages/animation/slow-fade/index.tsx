@@ -38,8 +38,6 @@ function Slow() {
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
-	console.log(opacity);
-
 	return (
 		<div>
 			<header className={styles.header}>

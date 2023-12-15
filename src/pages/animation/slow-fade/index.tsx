@@ -7,32 +7,44 @@ import img02 from '@/images/slow-fade/img02.png';
 import { useEffect, useRef, useState } from 'react';
 
 function Slow() {
+	// 각 DOM 을 담을 ref 생성
 	const opacityRef = useRef<HTMLElement[]>([]);
 
+	// opacity 값을 담을 배열
 	const [opacity, setOpacity] = useState<number[]>([0, 0, 0]);
 
 	const onScroll = () => {
+		// 배열 복사
 		let opacityData = [...opacity];
 
+		// dom 을 담은 ref를 반복분으로 호출
 		opacityRef.current.map((item: HTMLElement, index: number) => {
+			// 각 dom의 높이, 포지션 정보 들
 			const { height, top, bottom } = item.getBoundingClientRect();
 
-			const offsetTop = top - 96;
+			// 컨텐츠 상단과 상단 스크롤 위치의 거리
+			const offsetTop = top - 96; // 96은 헤더 높이 값 (수정 가능)
 
-			const median = height / 2 - 200;
+			// 컨텐츠의 중간 값
+			const median = height / 2 - 200; // 200 수치는 수정 가능
+
+			// 중간 까지 거리의 opacity 구함
 			const present = Math.abs(offsetTop) / median;
 
 			if (0 > offsetTop && bottom > median) {
 				present < 1
-					? (opacityData[index] = present)
-					: (opacityData[index] = 1 - present * 0.2);
-				return setOpacity(opacityData);
+					? (opacityData[index] = present) // 중간 이전 1이 될 경우
+					: (opacityData[index] = 1 - present * 0.2); // 중간 이후 0이 될 경우(추측으로 구함)
+				return setOpacity(opacityData); // 구한 값을 useState에 할당
 			}
+
+			// 만약 위 if문 이 아니라면(영역을 벗어난 경우) 해당 순서의 opacity를 0으로 만듬
 			opacityData[index] = 0;
-			return setOpacity(opacityData);
+			return setOpacity(opacityData); // 구한 값을 useState에 할당
 		});
 	};
 
+	// scroll 이벤트
 	useEffect(() => {
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
@@ -54,7 +66,9 @@ function Slow() {
 						<ul className={styles.block}>
 							<li
 								className={styles.list}
+								// ref의 n번쨰  dom을 구함
 								ref={(el: HTMLLIElement) => (opacityRef.current[0] = el)}
+								// opacity를 useState에 담은 값을 반영
 								style={{ opacity: opacity[0] }}
 							>
 								<h4>

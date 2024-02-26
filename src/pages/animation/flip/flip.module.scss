@@ -38,19 +38,23 @@
 }
 
 .wrapper {
-	width: 600px;
+	width: 640px;
 	height: auto;
 	position: relative;
 	margin: 0 auto;
+	text-align: center;
 
-	.default {
-		width: 300px;
-		height: 500px;
-		margin: 0 auto;
-		perspective: 1000px;
+	.defaultWrapper {
 		display: flex;
 		justify-content: space-between;
-		background: #fcad;
+		.default {
+			width: 300px;
+			height: 500px;
+			perspective: 1000px;
+			display: flex;
+			justify-content: space-between;
+			background: #fcad;
+		}
 	}
 
 	.flipBox {
@@ -90,4 +94,15 @@
 			}
 		}
 	}
+}
+
+.button {
+	width: 150px;
+	height: 40px;
+	background: #ce82dd;
+	border: none;
+	color: #fff;
+	margin-top: 30px;
+	border-radius: 4px;
+	cursor: pointer;
 }

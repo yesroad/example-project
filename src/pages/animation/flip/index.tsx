@@ -10,7 +10,6 @@ function Flip() {
 	 * down - 내려감
 	 * NONE - 선택안함
 	 */
-
 	const [flipAni, setFlipAni] = useState<'UP' | 'DOWN' | 'NONE'>('NONE');
 
 	return (

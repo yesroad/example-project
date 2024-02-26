@@ -6,14 +6,26 @@ function Flip() {
 	const [flipAni, setFlipAni] = useState(false);
 
 	return (
-		<div className={styles.flipBox} onClick={() => setFlipAni(!flipAni)}>
+		<div className={styles.wrapper}>
 			<div
-				className={classNames(styles.flip, {
-					[styles.flipAniActive]: flipAni,
+				className={classNames(styles.default, {
+					[styles.fadeOutAniActive]: flipAni,
 				})}
+				onClick={() => setFlipAni(true)}
 			>
-				<div className={styles.front}>앞면</div>
-				<div className={styles.back}>뒷면</div>
+				기본 배경
+			</div>
+			<div className={styles.flipBox}>
+				{flipAni && (
+					<div
+						className={classNames(styles.flip, {
+							[styles.flipAniActive]: flipAni,
+						})}
+					>
+						<div className={styles.front}>앞면</div>
+						<div className={styles.back}>뒷면</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);
